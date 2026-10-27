@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ғылыми жоба моделі және оның нәтижесі</title>
+<style>
+:root{
+  --tx:#1d1d1f;--tx2:#55555c;--ac:#0a84ff;
+  --gl:rgba(255,255,255,.52);--gl2:rgba(255,255,255,.38);--bd:rgba(255,255,255,.7);--sh:rgba(40,50,90,.18);
+  --bg:linear-gradient(135deg,#cfe3ff,#e9dcff 50%,#ffe3d2);
+  --b1:#6fb3ff;--b2:#c39bff;--b3:#ffb48a;--b4:#7fe3d0;--bo:.75;
+}
+[data-theme=dark]{
+  --tx:#f5f5f7;--tx2:#b4b4bd;--ac:#64a8ff;
+  --gl:rgba(34,34,46,.5);--gl2:rgba(60,60,80,.38);--bd:rgba(255,255,255,.16);--sh:rgba(0,0,0,.5);
+  --bg:linear-gradient(135deg,#0d1030,#1b1040 50%,#0b2433);
+  --b1:#2f5fe0;--b2:#7a3fd1;--b3:#d2487a;--b4:#14a3a8;--bo:.6;
+}
+*{box-sizing:border-box;margin:0}
+html{font-size:clamp(11px,calc(1.45vh + .45vw + 3px),17px)}
+html,body{height:100%;overflow:hidden}
+body{font-family:-apple-system,"SF Pro Display","SF Pro Text",Inter,"Segoe UI",system-ui,sans-serif;color:var(--tx);background:var(--bg);transition:background .6s,color .4s;-webkit-font-smoothing:antialiased}
+.wall{position:fixed;inset:0;overflow:hidden;z-index:0}
+.wall i{position:absolute;border-radius:50%;filter:blur(70px);opacity:var(--bo);transition:background .6s,opacity .6s;animation:fl 22s ease-in-out infinite alternate}
+.wall i:nth-child(1){width:55vmax;height:55vmax;left:-15vmax;top:-18vmax;background:var(--b1)}
+.wall i:nth-child(2){width:48vmax;height:48vmax;right:-14vmax;top:5vh;background:var(--b2);animation-delay:-6s;animation-duration:26s}
+.wall i:nth-child(3){width:50vmax;height:40vmax;left:15vw;bottom:-22vmax;background:var(--b3);animation-delay:-11s}
+.wall i:nth-child(4){width:30vmax;height:30vmax;left:45vw;top:20vh;background:var(--b4);animation-delay:-3s;animation-duration:30s}
+@keyframes fl{to{transform:translate(8vmax,6vmax) rotate(40deg) scale(1.15)}}
+.glass{background:var(--gl);backdrop-filter:blur(36px) saturate(190%);-webkit-backdrop-filter:blur(36px) saturate(190%);border:1px solid var(--bd);box-shadow:0 20px 60px -15px var(--sh),inset 0 1px 0 rgba(255,255,255,.45);position:relative;transition:background .5s,border-color .5s}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.35),transparent 35%);opacity:.6}
+main{position:fixed;inset:0;z-index:1;padding:4.5vh 7.6rem 4.5vh 4vw}
+.s{position:absolute;inset:4.5vh 7.6rem 4.5vh 4vw;display:flex;opacity:0;pointer-events:none;transform:translateY(3vh) scale(.965);filter:blur(14px);transition:opacity .7s,transform .8s cubic-bezier(.2,.9,.2,1),filter .7s}
+.s.on{opacity:1;pointer-events:auto;transform:none;filter:none}
+.card{flex:1;border-radius:2.2rem;padding:2.2rem 2.6rem;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+h1{font-size:2.9rem;line-height:1.08;letter-spacing:-.03em;font-weight:700;max-width:16em}
+h2{font-size:1.9rem;letter-spacing:-.025em;font-weight:700;margin-bottom:.35rem}
+.sub{color:var(--tx2);font-size:1.02rem;margin-bottom:1.1rem;max-width:46rem;line-height:1.45}
+p,li{line-height:1.5;font-size:1rem}
+.body{flex:1;min-height:0;display:grid;gap:1rem}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g1{grid-template-columns:1fr}
+.box{background:var(--gl2);border:1px solid var(--bd);border-radius:1.4rem;padding:1.1rem 1.3rem;min-height:0;overflow:hidden}
+.box h3{font-size:1.1rem;margin-bottom:.4rem;letter-spacing:-.01em}
+.box p,.box li{color:var(--tx2);font-size:.93rem}
+.box ul{padding-left:1.1rem}
+.tag{display:inline-block;font-size:.8rem;padding:.2rem .7rem;border-radius:99px;background:var(--ac);color:#fff;margin-bottom:.5rem}
+/* intro */
+.hero{justify-content:center}
+.hero p{font-size:1.15rem;color:var(--tx2);max-width:40rem;margin:1.1rem 0 1.6rem}
+.hero h1 span{background:linear-gradient(90deg,#0a84ff,#bf5af2,#ff6482);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.go{align-self:flex-start;border:0;cursor:pointer;font:inherit;font-weight:600;color:#fff;background:var(--ac);padding:.8rem 1.6rem;border-radius:99px;box-shadow:0 8px 24px -8px var(--ac);transition:transform .25s}
+.go:hover{transform:scale(1.05)}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:.8rem;align-content:center;position:relative}
+.step{background:var(--gl2);border:1px solid var(--bd);border-radius:1.4rem;padding:1.1rem .9rem;cursor:pointer;transition:transform .35s cubic-bezier(.2,.9,.2,1),background .3s;opacity:0;transform:translateY(20px)}
+.s.on .step{opacity:1;transform:none;transition-delay:calc(var(--n)*.09s)}
+.s.on .step:hover,.step.act{transform:translateY(-8px)!important;background:var(--gl)}
+.step b{display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--ac);color:#fff;margin-bottom:.6rem}
+.step h3{font-size:1rem;margin-bottom:.3rem}.step p{font-size:.84rem;color:var(--tx2);line-height:1.4}
+.note{margin-top:1rem;padding:1rem 1.3rem;border-radius:1.2rem;background:var(--gl2);border:1px solid var(--bd);color:var(--tx2);font-size:.95rem}
+/* table */
+table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:1.2rem;border:1px solid var(--bd);font-size:.92rem}
+th,td{padding:.7rem 1rem;text-align:left}
+th{background:var(--gl);font-weight:600}
+td{background:var(--gl2);color:var(--tx2);border-top:1px solid var(--bd)}
+td:first-child{color:var(--tx);font-weight:600}
+tr{transition:filter .2s}tbody tr:hover td{background:var(--gl)}
+/* charts */
+.chart{display:flex;flex-direction:column}
+.bars{flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:space-around;gap:1rem;padding:.5rem .5rem 0;border-bottom:1px solid var(--bd)}
+.grp{display:flex;align-items:flex-end;gap:.5rem;height:100%}
+.bw{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;width:3.2rem;font-size:.85rem;font-weight:600}
+.bar{width:100%;height:0;border-radius:.8rem .8rem .2rem .2rem;transition:height 1.2s cubic-bezier(.2,.9,.2,1) .3s;background:linear-gradient(#8ab4ff,#5b8cff)}
+.bar.e{background:linear-gradient(#ff9ac4,#bf5af2)}
+.s.on .bar{height:calc(var(--v)*.88%)}
+.lab{display:flex;justify-content:space-around;font-size:.85rem;color:var(--tx2);padding-top:.5rem}
+.leg{display:flex;gap:1rem;font-size:.82rem;color:var(--tx2);margin-top:.4rem;flex-wrap:wrap}
+.leg u{display:inline-block;width:.7rem;height:.7rem;border-radius:3px;margin-right:.35rem;text-decoration:none}
+.donut{width:min(11rem,100%);aspect-ratio:1;border-radius:50%;margin:.3rem auto .8rem;position:relative;transition:transform 1.2s cubic-bezier(.2,.9,.2,1);transform:rotate(-120deg) scale(.6);opacity:0;
+ background:conic-gradient(#5b8cff 0 10%,#7d5bff 0 25%,#bf5af2 0 40%,#ff6482 0 75%,#ff9f0a 0 90%,#30d158 0 100%)}
+.s.on .donut{transform:none;opacity:1}
+.donut::after{content:"100%";position:absolute;inset:26%;border-radius:50%;display:grid;place-items:center;background:var(--gl);backdrop-filter:blur(10px);font-weight:700;font-size:1.1rem}
+.kpi{display:flex;gap:.8rem;margin-top:.6rem}.kpi div{flex:1;text-align:center;padding:.6rem;border-radius:1rem;background:var(--gl2);border:1px solid var(--bd)}
+.kpi b{display:block;font-size:1.5rem;letter-spacing:-.02em}.kpi span{font-size:.78rem;color:var(--tx2)}
+/* checklist */
+.chk{display:flex;gap:.8rem;align-items:flex-start;padding:.8rem 1rem;border-radius:1.1rem;background:var(--gl2);border:1px solid var(--bd);cursor:pointer;transition:background .3s,transform .3s}
+.chk:hover{transform:translateX(4px)}
+.chk i{flex:none;width:1.5rem;height:1.5rem;border-radius:50%;border:2px solid var(--tx2);display:grid;place-items:center;color:#fff;font-style:normal;font-size:.85rem;transition:.3s}
+.chk.d i{background:#30d158;border-color:#30d158}.chk.d{background:var(--gl)}
+.chk b{display:block;font-size:.98rem}.chk span{font-size:.85rem;color:var(--tx2)}
+.prog{height:.5rem;border-radius:9px;background:var(--gl2);overflow:hidden;margin-top:.9rem}
+.prog div{height:100%;width:0;background:linear-gradient(90deg,#0a84ff,#30d158);transition:width .6s}
+/* refs */
+.refs{list-style:none;padding:0!important;display:grid;gap:.6rem}
+.refs li{display:flex;gap:.8rem;align-items:center;padding:.7rem 1rem;border-radius:1.1rem;background:var(--gl2);border:1px solid var(--bd);color:var(--tx)!important;font-size:.92rem!important}
+.refs em{flex:none;width:1.8rem;height:1.8rem;border-radius:50%;display:grid;place-items:center;background:var(--ac);color:#fff;font-style:normal;font-size:.8rem}
+.refs a{color:var(--ac);text-decoration:none;word-break:break-all;font-size:.82rem}.refs a:hover{text-decoration:underline}
+/* dock */
+.dock{position:fixed;z-index:5;right:1.1rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.45rem;padding:.6rem;border-radius:2rem;align-items:center}
+.di{width:3.1rem;height:3.1rem;border-radius:28%;display:grid;place-items:center;font-size:1.5rem;cursor:pointer;border:0;color:#fff;background:linear-gradient(145deg,var(--c1),var(--c2));box-shadow:0 6px 14px -5px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.4);transform:scale(var(--k,1));transform-origin:right center;transition:transform .12s ease-out;position:relative}
+.di.on::after{content:"";position:absolute;right:-.55rem;top:50%;width:.3rem;height:.3rem;margin-top:-.15rem;border-radius:50%;background:var(--tx)}
+.di span{position:absolute;right:calc(100% + .9rem);top:50%;transform:translate(8px,-50%);white-space:nowrap;font-size:.85rem;color:var(--tx);padding:.35rem .8rem;border-radius:.7rem;background:var(--gl);backdrop-filter:blur(20px);border:1px solid var(--bd);opacity:0;pointer-events:none;transition:.2s}
+.di:hover span{opacity:1;transform:translate(0,-50%)}
+/* theme toggle */
+.th{position:fixed;z-index:6;top:1.1rem;right:1.1rem;width:2.9rem;height:2.9rem;border-radius:50%;border:1px solid var(--bd);cursor:pointer;display:grid;place-items:center;color:var(--tx);background:var(--gl);backdrop-filter:blur(30px) saturate(190%);-webkit-backdrop-filter:blur(30px) saturate(190%);box-shadow:0 8px 24px -8px var(--sh),inset 0 1px 0 rgba(255,255,255,.45);transition:transform .3s}
+.th:hover{transform:scale(1.08)}.th:active{transform:scale(.92)}
+.th svg{width:1.4rem;height:1.4rem;transition:transform .7s cubic-bezier(.2,.9,.2,1)}
+[data-theme=dark] .th svg{transform:rotate(180deg)}
+.th .m{transition:opacity .4s}.th .m{opacity:0}[data-theme=dark] .th .m{opacity:1}
+.cnt{position:fixed;z-index:5;left:calc(4vw + 1rem);bottom:1.3vh;font-size:.78rem;color:var(--tx2)}
+@media(max-width:820px){
+ html{font-size:11px}main{padding:3vh 5.2rem 3vh 3vw}.s{inset:3vh 5.2rem 3vh 3vw}.card{padding:1.2rem;border-radius:1.6rem;overflow:auto}
+ .g2,.g3{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.di{width:2.5rem;height:2.5rem;font-size:1.2rem}.dock{right:.4rem;padding:.4rem}h1{font-size:2rem}.th{top:.5rem;right:.5rem;width:2.4rem;height:2.4rem}.cnt{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<div class="wall"><i></i><i></i><i></i><i></i></div>
+
+<button class="th" id="th" aria-label="Жарық / қараңғы режим">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>
+</button>
+
+<main>
+<!-- 1 -->
+<section class="s on" data-i="🏠" data-t="Кіріспе" data-c="#0a84ff,#5e5ce6"><div class="card glass hero">
+<h1>Ғылыми жоба моделі және <span>оның нәтижесі</span></h1>
+<p>Ғылыми жоба – нақты мәселені белгілі мерзімде жүйелі зерттеп, тексерілетін нәтиже алуға бағытталған жұмыс. Жоба моделі – идеядан қорытындыға дейінгі қадамдардың жоспары.</p>
+<div class="body g3" style="flex:0;margin-bottom:1.4rem">
+<div class="box"><h3>Мақсат</h3><p>Жоба моделін түсіндіру және нәтижесін бағалауды үйрету.</p></div>
+<div class="box"><h3>Міндеттер</h3><p>Кезеңдерді сипаттау, мысал келтіру, ЖИ-ды дұрыс қолдану жолын көрсету.</p></div>
+<div class="box"><h3>Өзектілігі</h3><p>Жоспарланған жоба уақытты үнемдеп, нәтиженің сапасын арттырады.</p></div>
+</div>
+<button class="go" onclick="go(1)">Бастау</button>
+</div></section>
+
+<!-- 2 -->
+<section class="s" data-i="🧭" data-t="Жоба моделі" data-c="#30b0c7,#0a84ff"><div class="card glass">
+<h2>Жоба моделі: алты кезең</h2>
+<p class="sub">Әр кезеңнің нәтижесі келесі кезеңге негіз болады. Кезеңді басып, назар аударыңыз.</p>
+<div class="body g1" style="grid-template-rows:1fr auto">
+<div class="steps" id="steps">
+<div class="step" style="--n:0"><b>1</b><h3>Мәселе</h3><p>Нені зерттейміз? Неге маңызды?</p></div>
+<div class="step" style="--n:1"><b>2</b><h3>Гипотеза</h3><p>Тексеруге болатын болжам құрамыз.</p></div>
+<div class="step" style="--n:2"><b>3</b><h3>Әдістеме</h3><p>Әдіс, құрал, үлгі және өлшем таңдаймыз.</p></div>
+<div class="step" style="--n:3"><b>4</b><h3>Эксперимент</h3><p>Дерек жинап, сынақ жүргіземіз.</p></div>
+<div class="step" style="--n:4"><b>5</b><h3>Талдау</h3><p>Нәтижені гипотезамен салыстырамыз.</p></div>
+<div class="step" style="--n:5"><b>6</b><h3>Қорғау</h3><p>Баяндама жасап, жариялап, енгіземіз.</p></div>
+</div>
+<div class="note" id="stepnote">Басты ереже: гипотеза жоқ жерде нәтижені бағалайтын өлшем де болмайды.</div>
+</div></div></section>
+
+<!-- 3 -->
+<section class="s" data-i="📋" data-t="Кесте" data-c="#ff9f0a,#ff6482"><div class="card glass">
+<h2>Модель компоненттері</h2>
+<p class="sub">Әр компоненттің мазмұны, өнімі және жоба уақытындағы үлесі.</p>
+<div class="body g1"><table>
+<thead><tr><th>Компонент</th><th>Мазмұны</th><th>Өнім</th><th>Үлесі</th></tr></thead>
+<tbody>
+<tr><td>Мақсат пен міндет</td><td>Мәселені анықтау, гипотеза құру</td><td>Жоба паспорты</td><td>10%</td></tr>
+<tr><td>Әдебиетке шолу</td><td>Бұрынғы зерттеулерді талдау</td><td>Шолу мәтіні</td><td>15%</td></tr>
+<tr><td>Әдістеме</td><td>Әдіс, құрал, үлгіні таңдау</td><td>Зерттеу жоспары</td><td>15%</td></tr>
+<tr><td>Эксперимент</td><td>Дерек жинау, сынақ жүргізу</td><td>Деректер жиыны</td><td>35%</td></tr>
+<tr><td>Талдау және қорытынды</td><td>Статистика, түсіндіру</td><td>Есеп, мақала</td><td>15%</td></tr>
+<tr><td>Қорғау және енгізу</td><td>Таныстыру, жариялау</td><td>Баяндама, прототип</td><td>10%</td></tr>
+</tbody></table></div>
+</div></section>
+
+<!-- 4 -->
+<section class="s" data-i="📊" data-t="Диаграмма" data-c="#bf5af2,#5e5ce6"><div class="card glass">
+<h2>Жоба нәтижесі: диаграммалар</h2>
+<p class="sub">Шартты мысал: оқу жобасындағы эксперименттік және бақылау тобының сынақ балы (100 баллдық шкала).</p>
+<div class="body g2" style="grid-template-columns:1.3fr 1fr">
+<div class="box chart">
+<div class="bars">
+<div class="grp"><div class="bw">62<div class="bar" style="--v:62"></div></div><div class="bw">66<div class="bar" style="--v:66"></div></div></div>
+<div class="grp"><div class="bw">61<div class="bar e" style="--v:61"></div></div><div class="bw">78<div class="bar e" style="--v:78"></div></div></div>
+</div>
+<div class="lab"><span>Бақылау тобы</span><span>Эксперимент тобы</span></div>
+<div class="leg"><span><u style="background:#5b8cff"></u>Жоба алдында</span><span><u style="background:#bf5af2"></u>Жобадан кейін</span></div>
+</div>
+<div class="box"><h3>Уақыт үлесі</h3><div class="donut"></div>
+<div class="leg"><span><u style="background:#5b8cff"></u>Мақсат 10</span><span><u style="background:#7d5bff"></u>Шолу 15</span><span><u style="background:#bf5af2"></u>Әдіс 15</span><span><u style="background:#ff6482"></u>Тәжірибе 35</span><span><u style="background:#ff9f0a"></u>Талдау 15</span><span><u style="background:#30d158"></u>Қорғау 10</span></div>
+<div class="kpi"><div><b>+17</b><span>эксперимент тобы</span></div><div><b>+4</b><span>бақылау тобы</span></div></div>
+</div>
+</div></div></section>
+
+<!-- 5 -->
+<section class="s" data-i="💡" data-t="Мысалдар" data-c="#30d158,#30b0c7"><div class="card glass">
+<h2>Жоба мысалдары</h2>
+<p class="sub">Модельді әртүрлі салада қолдануға болады.</p>
+<div class="body g3">
+<div class="box"><span class="tag">Жаратылыстану</span><h3>Су сүзгісінің тиімділігі</h3><ul><li>Мәселе: ауыз судың тазалығы.</li><li>Гипотеза: көмір қабаты қоспаны азайтады.</li><li>Нәтиже: қоспа деңгейі өлшем бойынша төмендеді.</li></ul></div>
+<div class="box"><span class="tag">Әлеуметтік</span><h3>Мектептегі оқу уәжі</h3><ul><li>Мәселе: оқушылардың белсенділігі төмен.</li><li>Гипотеза: жоба әдісі уәжді арттырады.</li><li>Нәтиже: сауалнама көрсеткіші артты.</li></ul></div>
+<div class="box"><span class="tag">IT</span><h3>Қазақ тілін тану қосымшасы</h3><ul><li>Мәселе: сөйлеуді мәтінге айналдыру.</li><li>Гипотеза: жергілікті дерек дәлдікті арттырады.</li><li>Нәтиже: қате пайызы азайды.</li></ul></div>
+</div></div></section>
+
+<!-- 6 -->
+<section class="s" data-i="✨" data-t="Жасанды интеллект" data-c="#ff6482,#bf5af2"><div class="card glass">
+<h2>Жобада жасанды интеллект</h2>
+<p class="sub">ЖИ – көмекші құрал. Зерттеудің авторы мен жауапкершілігі – адамда.</p>
+<div class="body g2">
+<div class="box"><h3>Қайда көмектеседі</h3><ul>
+<li><b>Әдебиет іздеу:</b> тақырып бойынша бастапқы тізім.</li>
+<li><b>Идея беру:</b> гипотеза мен сұрақ нұсқалары.</li>
+<li><b>Деректерді талдау:</b> кесте, график, есептеу.</li>
+<li><b>Мәтінді жетілдіру:</b> стиль, емле, құрылым.</li></ul></div>
+<div class="box"><h3>Сақтық шаралары</h3><ul>
+<li><b>Тексеріңіз:</b> ЖИ қате немесе ойдан дерек беруі мүмкін.</li>
+<li><b>Дереккөз:</b> әр деректі түпнұсқадан растаңыз.</li>
+<li><b>Құпиялық:</b> жеке деректі жүктемеңіз.</li>
+<li><b>Адалдық:</b> ЖИ қолданғаныңызды ашық көрсетіңіз.</li></ul></div>
+</div></div></section>
+
+<!-- 7 -->
+<section class="s" data-i="✅" data-t="Ұсыныстар" data-c="#ffd60a,#ff9f0a"><div class="card glass">
+<h2>Сәтті жобаға арналған ұсыныстар</h2>
+<p class="sub">Орындағаныңызды басып белгілеңіз.</p>
+<div class="body g2" style="grid-template-columns:1fr 1fr;align-content:start">
+<div class="chk"><i></i><div><b>Мәселені нақты қойыңыз</b><span>Бір сұрақ, бір өлшенетін мақсат.</span></div></div>
+<div class="chk"><i></i><div><b>Жоспар құрыңыз</b><span>Кезеңдер мен мерзімдерді алдын ала жазыңыз.</span></div></div>
+<div class="chk"><i></i><div><b>Сенімді дереккөз қолданыңыз</b><span>Рецензияланған еңбектерге сүйеніңіз.</span></div></div>
+<div class="chk"><i></i><div><b>Деректі дұрыс сақтаңыз</b><span>Файлдарды жүйелеп, көшірмесін жасаңыз.</span></div></div>
+<div class="chk"><i></i><div><b>Нәтижені өлшеңіз</b><span>Сандық көрсеткіш пен салыстыру топтарын қолданыңыз.</span></div></div>
+<div class="chk"><i></i><div><b>Этиканы сақтаңыз</b><span>Плагиатсыз, келісіммен, ашық түрде жұмыс істеңіз.</span></div></div>
+</div>
+<div class="prog"><div id="pg"></div></div>
+</div></section>
+
+<!-- 8 -->
+<section class="s" data-i="🏁" data-t="Қорытынды" data-c="#5e5ce6,#bf5af2"><div class="card glass">
+<h2>Қорытынды</h2>
+<p class="sub">Ғылыми жоба моделі зерттеуді ретке келтіріп, нәтижені дәлелді етеді.</p>
+<div class="body g3">
+<div class="box"><h3>Модель</h3><p>Мәселеден қорғауға дейінгі алты кезең жұмысты жүйелі және бақыланатын етеді.</p></div>
+<div class="box"><h3>Нәтиже</h3><p>Нәтиже өлшемге, салыстыруға және талдауға сүйенгенде ғана сенімді болады.</p></div>
+<div class="box"><h3>ЖИ</h3><p>Жасанды интеллект жұмысты жеделдетеді, бірақ тексеру мен шешім адамда қалады.</p></div>
+</div>
+<p style="margin-top:1rem;color:var(--tx2)">Жақсы жоба – жақсы жоспардан басталады. Назарларыңызға рахмет!</p>
+</div></section>
+
+<!-- 9 -->
+<section class="s" data-i="📚" data-t="Әдебиеттер" data-c="#8e8e93,#636366"><div class="card glass">
+<h2>Пайдаланылған әдебиеттер</h2>
+<p class="sub">Сілтемені басып, дереккөзді ашыңыз.</p>
+<div class="body g1"><ul class="refs">
+<li><em>1</em><div>Project Management Institute. PMBOK Guide және жоба басқару стандарттары.<br><a href="https://www.pmi.org/standards/pmbok" target="_blank" rel="noopener">pmi.org/standards/pmbok</a></div></li>
+<li><em>2</em><div>OECD. Frascati Manual 2015: ғылыми зерттеулер мен әзірлемелерді өлшеу.<br><a href="https://www.oecd.org/en/publications/frascati-manual-2015_9789264239012-en.html" target="_blank" rel="noopener">oecd.org/…/frascati-manual-2015</a></div></li>
+<li><em>3</em><div>Wilkinson M. D. және т.б. FAIR Guiding Principles. Scientific Data, 2016.<br><a href="https://doi.org/10.1038/sdata.2016.18" target="_blank" rel="noopener">doi.org/10.1038/sdata.2016.18</a></div></li>
+<li><em>4</em><div>UNESCO. Жасанды интеллект этикасы туралы ұсыным (2021).<br><a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" target="_blank" rel="noopener">unesco.org/…/recommendation-ethics</a></div></li>
+<li><em>5</em><div>Creswell J. W. Research Design: Qualitative, Quantitative, and Mixed Methods Approaches. SAGE.<br><a href="https://search.worldcat.org/search?q=Creswell+Research+Design" target="_blank" rel="noopener">worldcat.org – Research Design</a></div></li>
+<li><em>6</em><div>FAIR Principles – деректерді табуға, қолжетімді етуге, үйлесімді және қайта қолдануға болатын ету.<br><a href="https://www.go-fair.org/fair-principles/" target="_blank" rel="noopener">go-fair.org/fair-principles</a></div></li>
+</ul></div>
+</div></section>
+</main>
+
+<nav class="dock glass" id="dock" aria-label="Мәзір"></nav>
+<div class="cnt" id="cnt"></div>
+
+<script>
+const S=[...document.querySelectorAll('.s')],dock=document.getElementById('dock');let cur=0,lock=false;
+S.forEach((s,i)=>{const [c1,c2]=s.dataset.c.split(',');const b=document.createElement('button');b.className='di';b.style.setProperty('--c1',c1);b.style.setProperty('--c2',c2);b.innerHTML=s.dataset.i+'<span>'+s.dataset.t+'</span>';b.setAttribute('aria-label',s.dataset.t);b.onclick=()=>go(i);dock.appendChild(b)});
+const D=[...dock.children];
+function go(i){if(i<0||i>=S.length)return;cur=i;S.forEach((s,k)=>s.classList.toggle('on',k==i));D.forEach((d,k)=>d.classList.toggle('on',k==i));document.getElementById('cnt').textContent=(i+1)+' / '+S.length+' · '+S[i].dataset.t;try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+// dock magnification
+dock.addEventListener('mousemove',e=>{D.forEach(d=>{const r=d.getBoundingClientRect(),dist=Math.abs(e.clientY-(r.top+r.height/2));d.style.setProperty('--k',(1+.55*Math.exp(-(dist*dist)/(2*55*55))).toFixed(3))})});
+dock.addEventListener('mouseleave',()=>D.forEach(d=>d.style.setProperty('--k',1)));
+// navigation
+addEventListener('wheel',e=>{if(lock||Math.abs(e.deltaY)<20)return;lock=true;go(cur+(e.deltaY>0?1:-1));setTimeout(()=>lock=false,800)},{passive:true});
+addEventListener('keydown',e=>{if(['ArrowDown','ArrowRight','PageDown'].includes(e.key))go(cur+1);if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key))go(cur-1)});
+let y0;addEventListener('touchstart',e=>y0=e.touches[0].clientY,{passive:true});
+addEventListener('touchend',e=>{const d=y0-e.changedTouches[0].clientY;if(Math.abs(d)>70&&innerWidth>820)go(cur+(d>0?1:-1))});
+// theme
+const root=document.documentElement;
+function setTheme(t){root.dataset.theme=t;try{localStorage.setItem('th',t)}catch(e){}}
+let t0;try{t0=localStorage.getItem('th')}catch(e){}
+setTheme(t0||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));
+document.getElementById('th').onclick=()=>setTheme(root.dataset.theme=='dark'?'light':'dark');
+// steps
+const notes=['Мәселе нақты болса, зерттеу бағыты да анық болады.','Гипотеза тексеруге болатындай және өлшенетіндей болуы керек.','Әдістеме басқа зерттеуші қайталай алатындай толық жазылады.','Деректерді жүйелі жинап, әр өлшемді тіркеп отырыңыз.','Нәтиже гипотезаны растай ма, жоқ па – соны адал көрсетіңіз.','Қорытындыны қысқа, дәлелді және көрнекі түрде таныстырыңыз.'];
+document.querySelectorAll('.step').forEach((st,i)=>st.onclick=()=>{document.querySelectorAll('.step').forEach(x=>x.classList.remove('act'));st.classList.add('act');document.getElementById('stepnote').textContent=notes[i]});
+// checklist
+const ck=[...document.querySelectorAll('.chk')];
+ck.forEach(c=>c.onclick=()=>{c.classList.toggle('d');c.querySelector('i').textContent=c.classList.contains('d')?'✓':'';document.getElementById('pg').style.width=ck.filter(x=>x.classList.contains('d')).length/ck.length*100+'%'});
+const h=parseInt(location.hash.slice(1));go(h>0&&h<=S.length?h-1:0);
+</script>
+</body>
+</html>
